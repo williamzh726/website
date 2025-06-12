@@ -1,13 +1,347 @@
 <!DOCTYPE html>
-<html>
-  <head>
-    <title>William Zhou</title>
-    <style>
-      body { text-align:center; font-family:sans-serif; background:#f0f4f8; }
-    </style>
-  </head>
-  <body>
-    <h1>William Zhou</h1>
-    <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=800&q=80" alt="Mountain" style="max-width:90vw; border-radius:10px;">
-  </body>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History of Airplanes | William Zhou</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background: #f4f7fa;
+      color: #222;
+      min-height: 100vh;
+      display: flex;
+    }
+    .sidebar {
+      width: 250px;
+      background: #1a2636;
+      color: #fff;
+      box-shadow: 2px 0 8px rgba(0,0,0,0.10);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+      padding-top: 2rem;
+      position: fixed;
+      top: 0; left: 0; bottom: 0;
+      z-index: 10;
+      height: 100vh;
+    }
+    .sidebar nav {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: stretch;
+    }
+    .sidebar a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: 500;
+      padding: 0.8rem 1.2rem;
+      border-radius: 0 20px 20px 0;
+      margin-right: 1rem;
+      transition: background 0.2s, color 0.2s;
+      font-size: 1.1rem;
+    }
+    .sidebar a.active, .sidebar a:focus {
+      background: #4fc3f7;
+      color: #1a2636;
+      outline: 2px solid #4fc3f7;
+    }
+    .main-content {
+      margin-left: 250px;
+      width: 100%;
+      padding: 0;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    section.page {
+      display: none;
+      width: 100%;
+      max-width: 900px;
+      margin: 2.5rem auto 0 auto;
+      background: #fff;
+      border-radius: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+      padding: 2.5rem 2rem 2rem 2rem;
+      min-height: 350px;
+    }
+    section.page.active {
+      display: block;
+    }
+    .year-title {
+      color: #1976d2;
+      margin-top: 0;
+    }
+    .event {
+      margin-bottom: 1.5rem;
+      border-left: 4px solid #4fc3f7;
+      padding-left: 1rem;
+    }
+    .timeline {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.2rem;
+      margin: 2rem 0 2.5rem 0;
+    }
+    .timeline-btn {
+      background: #e3f2fd;
+      color: #1976d2;
+      border: none;
+      border-radius: 20px;
+      padding: 0.7rem 1.3rem;
+      font-size: 1.1rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+      margin-bottom: 0.5rem;
+    }
+    .timeline-btn:hover, .timeline-btn:focus {
+      background: #1976d2;
+      color: #fff;
+      outline: 2px solid #1976d2;
+    }
+    .about-contact {
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+    .about-contact a {
+      color: #1976d2;
+      text-decoration: underline;
+      word-break: break-all;
+    }
+    @media (max-width: 900px) {
+      .sidebar { width: 100px; }
+      .sidebar a { font-size: 0.95rem; padding: 0.7rem 0.5rem; margin-right: 0.2rem; border-radius: 0 10px 10px 0; }
+      .main-content { margin-left: 100px; }
+    }
+    @media (max-width: 600px) {
+      .sidebar { position: static; width: 100vw; height: auto; flex-direction: row; box-shadow: none; padding-top: 0; }
+      .sidebar nav { flex-direction: row; gap: 0.2rem; }
+      .sidebar a { border-radius: 0; margin: 0; width: 100%; text-align: center; }
+      .main-content { margin-left: 0; }
+      .timeline { flex-direction: column; align-items: center; }
+    }
+  </style>
+</head>
+<body>
+  <aside class="sidebar">
+    <nav aria-label="Aviation History Navigation">
+      <a href="#home" class="active" data-page="home">Home</a>
+      <a href="#pre1900" data-page="pre1900">Before 1900</a>
+      <a href="#wright" data-page="wright">1903: Wright Brothers</a>
+      <a href="#ww1" data-page="ww1">1914–1918: World War I</a>
+      <a href="#golden" data-page="golden">1919–1938: Golden Age</a>
+      <a href="#ww2" data-page="ww2">1939–1945: World War II</a>
+      <a href="#jet" data-page="jet">1947: Jet Age</a>
+      <a href="#space" data-page="space">1957–1969: Space & Supersonic</a>
+      <a href="#modern" data-page="modern">1970–2000: Modern Era</a>
+      <a href="#future" data-page="future">2000–Present: The Future</a>
+      <a href="#about" data-page="about">About/Contact</a>
+    </nav>
+  </aside>
+  <div class="main-content">
+    <section class="page active" id="home">
+      <h1 style="font-size:2.5rem; margin-bottom:0.2em;">William Zhou</h1>
+      <h2 style="color:#1976d2; margin-top:0;">History of Airplanes</h2>
+      <p style="font-size:1.2rem; max-width:600px;">This website is a comprehensive, educational resource documenting the history of airplanes—from early dreams and experiments to the modern era and beyond. Explore key milestones, technological breakthroughs, and the people who changed the world of flight. Perfect for students, teachers, and aviation enthusiasts!</p>
+      <div class="timeline" aria-label="Aviation Timeline" style="position:relative;">
+        <div style="position:relative; width:100%; max-width:800px; margin:2rem auto 0 auto; height:70px;">
+          <div style="position:absolute; top:32px; left:0; right:0; height:6px; background:#b3e5fc; border-radius:3px;"></div>
+          <div style="display:flex; justify-content:space-between; align-items:center; position:relative; z-index:1; height:70px;">
+            <button class="timeline-btn" data-page="pre1900" style="position:relative; top:0;">Before 1900</button>
+            <button class="timeline-btn" data-page="wright" style="position:relative; top:0;">1903</button>
+            <button class="timeline-btn" data-page="ww1" style="position:relative; top:0;">WWI</button>
+            <button class="timeline-btn" data-page="golden" style="position:relative; top:0;">Golden Age</button>
+            <button class="timeline-btn" data-page="ww2" style="position:relative; top:0;">WWII</button>
+            <button class="timeline-btn" data-page="jet" style="position:relative; top:0;">Jet Age</button>
+            <button class="timeline-btn" data-page="space" style="position:relative; top:0;">Space & Supersonic</button>
+            <button class="timeline-btn" data-page="modern" style="position:relative; top:0;">Modern Era</button>
+            <button class="timeline-btn" data-page="future" style="position:relative; top:0;">Future</button>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="page" id="pre1900">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">Before 1900: Early Dreams & Experiments</h1>
+      <div class="event">
+        <strong>Ancient Myths & Leonardo da Vinci</strong>
+        <p>Human fascination with flight dates back to ancient times, with myths like Icarus and Daedalus. Leonardo da Vinci (1452–1519) sketched flying machines, including the ornithopter, but none were built successfully.</p>
+      </div>
+      <div class="event">
+        <strong>1783 – The Montgolfier Brothers' Hot Air Balloon</strong>
+        <p>The first recorded manned flight was a hot air balloon by the Montgolfier brothers in France. This was not powered flight, but it proved humans could leave the ground.</p>
+      </div>
+      <div class="event">
+        <strong>1891–1896 – Otto Lilienthal's Gliders</strong>
+        <p>German engineer Otto Lilienthal made over 2,000 flights in gliders, proving controlled flight was possible. He is called the "Glider King."</p>
+      </div>
+    </section>
+    <section class="page" id="wright">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">1903: The Wright Brothers</h1>
+      <div class="event">
+        <strong>December 17, 1903 – First Powered Flight</strong>
+        <p>Orville and Wilbur Wright achieved the first controlled, sustained, powered flight in Kitty Hawk, North Carolina. The Wright Flyer flew 120 feet in 12 seconds.</p>
+      </div>
+      <div class="event">
+        <strong>1904–1905 – Improved Flyers</strong>
+        <p>The Wrights built improved versions, achieving longer, more controlled flights and demonstrating practical flight to the world.</p>
+      </div>
+    </section>
+    <section class="page" id="ww1">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">1914–1918: World War I</h1>
+      <div class="event">
+        <strong>1914 – Airplanes in Combat</strong>
+        <p>World War I saw the first use of airplanes in combat, initially for reconnaissance, then for dogfights and bombing. Famous planes included the Fokker Dr.I triplane and the Sopwith Camel.</p>
+      </div>
+      <div class="event">
+        <strong>1918 – Rapid Innovation</strong>
+        <p>Aircraft technology advanced rapidly, with stronger engines, synchronized machine guns, and better aerodynamics.</p>
+      </div>
+    </section>
+    <section class="page" id="golden">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">1919–1938: The Golden Age of Aviation</h1>
+      <div class="event">
+        <strong>1927 – Charles Lindbergh's Solo Atlantic Flight</strong>
+        <p>Lindbergh flew nonstop from New York to Paris in the Spirit of St. Louis, inspiring global interest in aviation.</p>
+      </div>
+      <div class="event">
+        <strong>1932 – Amelia Earhart's Solo Atlantic Flight</strong>
+        <p>Amelia Earhart became the first woman to fly solo across the Atlantic, breaking barriers for women in aviation.</p>
+      </div>
+      <div class="event">
+        <strong>1930s – Commercial Air Travel</strong>
+        <p>Airliners like the Douglas DC-3 made passenger air travel practical and popular.</p>
+      </div>
+    </section>
+    <section class="page" id="ww2">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">1939–1945: World War II</h1>
+      <div class="event">
+        <strong>1939–1945 – Air Power Dominates</strong>
+        <p>World War II saw massive advances: all-metal planes, radar, long-range bombers, and the first jet fighters. Iconic planes included the Spitfire, B-17 Flying Fortress, and Messerschmitt Me 262.</p>
+      </div>
+      <div class="event">
+        <strong>1944 – D-Day Air Operations</strong>
+        <p>Allied air forces played a crucial role in the success of D-Day and the liberation of Europe.</p>
+      </div>
+    </section>
+    <section class="page" id="jet">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">1947: The Jet Age Begins</h1>
+      <div class="event">
+        <strong>October 14, 1947 – Breaking the Sound Barrier</strong>
+        <p>Chuck Yeager flew the Bell X-1 faster than the speed of sound, ushering in the Jet Age.</p>
+      </div>
+      <div class="event">
+        <strong>1952 – First Commercial Jet: de Havilland Comet</strong>
+        <p>The de Havilland Comet became the first commercial jet airliner, revolutionizing air travel.</p>
+      </div>
+    </section>
+    <section class="page" id="space">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">1957–1969: Space & Supersonic Flight</h1>
+      <div class="event">
+        <strong>1957 – Sputnik & the Space Race</strong>
+        <p>The launch of Sputnik by the USSR began the space age, pushing aviation technology to new heights.</p>
+      </div>
+      <div class="event">
+        <strong>1969 – Concorde's First Flight</strong>
+        <p>The Concorde, a supersonic passenger jet, made its first flight, symbolizing the peak of commercial aviation speed.</p>
+      </div>
+      <div class="event">
+        <strong>1969 – Apollo 11 Moon Landing</strong>
+        <p>While not an airplane, the Apollo 11 mission marked the ultimate achievement in human flight.</p>
+      </div>
+    </section>
+    <section class="page" id="modern">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">1970–2000: The Modern Era</h1>
+      <div class="event">
+        <strong>1970 – Boeing 747 Enters Service</strong>
+        <p>The Boeing 747 "Jumbo Jet" made long-distance air travel affordable and accessible to millions.</p>
+      </div>
+      <div class="event">
+        <strong>1980s–1990s – Fly-by-Wire & Stealth</strong>
+        <p>Technologies like fly-by-wire controls and stealth aircraft (e.g., F-117 Nighthawk) changed military and commercial aviation.</p>
+      </div>
+      <div class="event">
+        <strong>1995 – Boeing 777 First Flight</strong>
+        <p>The Boeing 777 set new standards for efficiency, range, and passenger comfort.</p>
+      </div>
+    </section>
+    <section class="page" id="future">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1 class="year-title">2000–Present: The Future of Flight</h1>
+      <div class="event">
+        <strong>2005 – Airbus A380 First Flight</strong>
+        <p>The Airbus A380, the world's largest passenger airliner, took its first flight.</p>
+      </div>
+      <div class="event">
+        <strong>2010s – Rise of Drones & Electric Aircraft</strong>
+        <p>Unmanned aerial vehicles (drones) and electric aircraft began to change aviation, with new possibilities for transport and research.</p>
+      </div>
+      <div class="event">
+        <strong>2020s – Sustainable Aviation</strong>
+        <p>Focus on sustainability, biofuels, and new designs for greener flight. Supersonic and even hypersonic passenger concepts are in development.</p>
+      </div>
+    </section>
+    <section class="page" id="about">
+      <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
+      <h1>About Me / Contact</h1>
+      <div class="about-contact">
+        <p><strong>William Zhou</strong></p>
+        <p>Email: <a href="mailto:william.zhou@kinkaid.org">william.zhou@kinkaid.org</a></p>
+        <p>GitHub: <a href="https://github.com/williamzh726" target="_blank" rel="noopener">williamzh726</a></p>
+        <p>This website was created as a comprehensive resource to teach and share the history of airplanes. If you have questions or suggestions, feel free to reach out!</p>
+      </div>
+    </section>
+  </div>
+  <script>
+    // Sidebar navigation logic
+    const navLinks = document.querySelectorAll('.sidebar nav a');
+    const pages = document.querySelectorAll('section.page');
+    function showPage(pageId) {
+      pages.forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+      navLinks.forEach(a => a.classList.remove('active'));
+      document.querySelector('.sidebar nav a[data-page="'+pageId+'"]').classList.add('active');
+    }
+    navLinks.forEach(link => {
+      link.addEventListener('click', e => {
+        e.preventDefault();
+        const page = link.getAttribute('data-page');
+        showPage(page);
+        history.replaceState(null, '', '#' + page);
+      });
+    });
+    // Timeline navigation
+    document.querySelectorAll('.timeline-btn').forEach(btn => {
+      btn.addEventListener('click', e => {
+        const page = btn.getAttribute('data-page');
+        showPage(page);
+        history.replaceState(null, '', '#' + page);
+      });
+    });
+    // Return to Home button logic
+    document.querySelectorAll('.return-home').forEach(btn => {
+      btn.addEventListener('click', e => {
+        showPage('home');
+        history.replaceState(null, '', '#home');
+      });
+    });
+    // On load, show correct page if hash present
+    window.addEventListener('DOMContentLoaded', () => {
+      const hash = window.location.hash.replace('#','');
+      if(hash && document.getElementById(hash)) showPage(hash);
+    });
+  </script>
+</body>
 </html>
