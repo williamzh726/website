@@ -13,8 +13,11 @@
       min-height: 100vh;
       display: flex;
     }
+    /* Sidebar compressed/expanded styles */
     .sidebar {
-      width: 250px;
+      width: 85px;
+      min-width: 85px;
+      max-width: 290px;
       background: #1a2636;
       color: #fff;
       box-shadow: 2px 0 8px rgba(0,0,0,0.10);
@@ -26,6 +29,12 @@
       top: 0; left: 0; bottom: 0;
       z-index: 10;
       height: 100vh;
+      transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+      overflow-x: hidden;
+    }
+    .sidebar:hover {
+      width: 290px;
+      min-width: 290px;
     }
     .sidebar nav {
       display: flex;
@@ -34,22 +43,61 @@
       align-items: stretch;
     }
     .sidebar a {
-      color: #fff;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.8rem 1.2rem;
-      border-radius: 0 20px 20px 0;
-      margin-right: 1rem;
-      transition: background 0.2s, color 0.2s;
+      display: flex;
+      align-items: center;
+      gap: 0.5em;
+      white-space: nowrap;
+      padding: 0.8rem 0.5rem;
       font-size: 1.1rem;
+      border-radius: 0 20px 20px 0;
+      margin-right: 0;
+      background: #1a2636;
+      transition: background 0.2s, color 0.2s, width 0.2s, box-shadow 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+      overflow: hidden;
+      text-decoration: none !important;
+      -webkit-text-decoration: none !important;
+      text-decoration-skip-ink: none !important;
     }
     .sidebar a.active, .sidebar a:focus {
       background: #4fc3f7;
       color: #1a2636;
       outline: 2px solid #4fc3f7;
     }
+    .sidebar .sidebar-date {
+      min-width: 55px;
+      display: inline-block;
+      text-align: left;
+      color: #fff;
+      transition: color 0.2s;
+      text-decoration: none !important;
+      -webkit-text-decoration: none !important;
+      text-decoration-skip-ink: none !important;
+    }
+    .sidebar a.active .sidebar-date, .sidebar a:focus .sidebar-date {
+      color: #1a2636;
+    }
+    .sidebar .sidebar-title {
+      opacity: 0;
+      max-width: 220px;
+      overflow: hidden;
+      transition: opacity 0.4s cubic-bezier(0.22, 1, 0.36, 1), max-width 0.6s cubic-bezier(0.22, 1, 0.36, 1), margin-left 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+      color: #fff;
+      text-decoration: none !important;
+      -webkit-text-decoration: none !important;
+      text-decoration-skip-ink: none !important;
+    }
+    .sidebar:hover .sidebar-title {
+      opacity: 1;
+      max-width: 220px;
+      margin-left: 0.5em;
+    }
+    .sidebar:hover a {
+      background: #1a2636;
+    }
     .main-content {
-      margin-left: 250px;
+      margin-left: 290px;
       width: 100%;
       padding: 0;
       min-height: 100vh;
@@ -114,33 +162,30 @@
       word-break: break-all;
     }
     @media (max-width: 900px) {
-      .sidebar { width: 100px; }
-      .sidebar a { font-size: 0.95rem; padding: 0.7rem 0.5rem; margin-right: 0.2rem; border-radius: 0 10px 10px 0; }
-      .main-content { margin-left: 100px; }
+      .sidebar { width: 60px; min-width: 60px; }
+      .sidebar:hover { width: 140px; min-width: 140px; }
+      .main-content { margin-left: 140px; }
     }
     @media (max-width: 600px) {
-      .sidebar { position: static; width: 100vw; height: auto; flex-direction: row; box-shadow: none; padding-top: 0; }
-      .sidebar nav { flex-direction: row; gap: 0.2rem; }
-      .sidebar a { border-radius: 0; margin: 0; width: 100%; text-align: center; }
-      .main-content { margin-left: 0; }
-      .timeline { flex-direction: column; align-items: center; }
+      .sidebar { width: 100vw !important; min-width: 100vw !important; }
+      .sidebar:hover { width: 100vw !important; min-width: 100vw !important; }
     }
   </style>
 </head>
 <body>
   <aside class="sidebar">
     <nav aria-label="Aviation History Navigation">
-      <a href="#home" class="active" data-page="home">Home</a>
-      <a href="#pre1900" data-page="pre1900">Before 1900</a>
-      <a href="#wright" data-page="wright">1903: Wright Brothers</a>
-      <a href="#ww1" data-page="ww1">1914–1918: World War I</a>
-      <a href="#golden" data-page="golden">1919–1938: Golden Age</a>
-      <a href="#ww2" data-page="ww2">1939–1945: World War II</a>
-      <a href="#jet" data-page="jet">1947: Jet Age</a>
-      <a href="#space" data-page="space">1957–1969: Space & Supersonic</a>
-      <a href="#modern" data-page="modern">1970–2000: Modern Era</a>
-      <a href="#future" data-page="future">2000–Present: The Future</a>
-      <a href="#about" data-page="about">About/Contact</a>
+      <a href="#home" class="active" data-page="home"><span class="sidebar-date">Home</span><span class="sidebar-title">Home</span></a>
+      <a href="#pre1900" data-page="pre1900"><span class="sidebar-date">Pre-1900</span><span class="sidebar-title">Before 1900</span></a>
+      <a href="#wright" data-page="wright"><span class="sidebar-date">1903</span><span class="sidebar-title">Wright Brothers</span></a>
+      <a href="#ww1" data-page="ww1"><span class="sidebar-date">1914–18</span><span class="sidebar-title">World War I</span></a>
+      <a href="#golden" data-page="golden"><span class="sidebar-date">1919–38</span><span class="sidebar-title">Golden Age</span></a>
+      <a href="#ww2" data-page="ww2"><span class="sidebar-date">1939–45</span><span class="sidebar-title">World War II</span></a>
+      <a href="#jet" data-page="jet"><span class="sidebar-date">1947</span><span class="sidebar-title">Jet Age</span></a>
+      <a href="#space" data-page="space"><span class="sidebar-date">1957–69</span><span class="sidebar-title">Space & Supersonic</span></a>
+      <a href="#modern" data-page="modern"><span class="sidebar-date">1970–00</span><span class="sidebar-title">Modern Era</span></a>
+      <a href="#future" data-page="future"><span class="sidebar-date">2000+</span><span class="sidebar-title">The Future</span></a>
+      <a href="#about" data-page="about"><span class="sidebar-date">About</span><span class="sidebar-title">About/Contact</span></a>
     </nav>
   </aside>
   <div class="main-content">
@@ -295,7 +340,7 @@
     </section>
     <section class="page" id="about">
       <button class="return-home" style="margin-bottom:1.5rem; background:#e3f2fd; color:#1976d2; border:none; border-radius:20px; padding:0.5rem 1.2rem; font-size:1rem; font-weight:500; cursor:pointer;">&larr; Return to Home</button>
-      <h1>About Me / Contact</h1>
+      <h1>About This Website / Contact</h1>
       <div class="about-contact">
         <p><strong>William Zhou</strong></p>
         <p>Email: <a href="mailto:william.zhou@kinkaid.org">william.zhou@kinkaid.org</a></p>
